@@ -11,4 +11,12 @@ This is a python script that uses Transport For Wales' API to get the train arri
 ## Why did you make this?
 I got frustrated with Transport For Wales' mobile interface for finding train times. 
 
-
+## How do I add more stations?
+If you go into `trainTimes.py` you'll see a dictionary called `stations`. Within this dictionary you add both the stations code (the one that the TFW api uses) and also the name of the station itself.
+```python
+stations = {
+	"Pye Corner":"GBPYE"
+	...
+	"<station name>:<TFW API internal station name>"
+}
+``` 
