@@ -13,7 +13,7 @@ time = strftime("%H:%M", gmtime())
 stations = {
         "Pye Corner":"GBPYE", 
         "Cardiff Central":"GBCDF", 
-        "Treforrest":"GBTRF",
+        "Trefforest":"GBTRF",
         "Pontyprydd":"GBPPD"
 }
 
