@@ -17,6 +17,6 @@ If you go into `trainTimes.py` you'll see a dictionary called `stations`. Within
 stations = {
 	"Pye Corner":"GBPYE"
 	...
-	"<station name>":"<TFW API internal station name>"
+	"station name":"TFW API internal station name"
 }
 ``` 
