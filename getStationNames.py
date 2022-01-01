@@ -1,18 +1,7 @@
 import requests
 
 def GetStationNames(user_input):
-	try:
-		r = requests.get('https://tfw.wales/api/silverrail-stations/find/{}'.format(user_input))
-		r.raise_for_status()
-	except requests.exceptions.RequestException as e:
-		return e 
-	try:
-		counter = 0
-		station_name = str(r.json()[counter]['name'])
-		
-		if station_name != user_input:
-			counter += 1
-		else:
-			return str(r.json()[counter]['sr_code'])
-	except ValueError:
-		print('value error, either you didnt spell the station correctly or you didnt type in the correct name of the station.')
+	r = requests.get(f'https://tfw.wales/api/silverrail-stations/find/{user_input}').json()
+	for x in r:
+		if x['name'] == user_input:
+			return x['sr_code']
