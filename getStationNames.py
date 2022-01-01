@@ -5,9 +5,9 @@ def GetStationNames(user_input):
 		r = requests.get('https://tfw.wales/api/silverrail-stations/find/{}'.format(user_input))
 		r.raise_for_status()
 	except requests.exceptions.RequestException as e:
-		raise SystemExit(e)
-	counter = 0
+		return e 
 	try:
+		counter = 0
 		station_name = str(r.json()[counter]['name'])
 		
 		if station_name != user_input:
