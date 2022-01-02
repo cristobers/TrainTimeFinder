@@ -4,9 +4,6 @@ from time import gmtime, strftime
 from datetime import date
 from getStationNames import GetStationNames
 
-# 	TFW has their own API for gathering the interal names of their system from those typed by end users,  
-# 	maybe it would be good to try and use that instead of having hardcoded stations within the script itself.
-
 parser = argparse.ArgumentParser()
 parser.add_argument("-o", "-O", help="origin station")
 parser.add_argument("-d", "-D", help="destination station")
@@ -19,15 +16,13 @@ origin = GetStationNames(args.o)
 destination = GetStationNames(args.d) 
 
 # this url will have to be changed if and when TFW change their API.
-url = 'https://tickets.trc.cymru/api/v1/silverrail/ticketsearch?token=Ir00ktJ11ZwvdSoNX79E&origin={origin}&destination={destination}&outboundDate={outbound_date}&outboundTime={out_time}&timeWindowInbound=departure&timeWindowOutbound=departure&ticketType=single&earlierSearch=false&adult=1&child=0&tfwRestricted=false&channelCode=WEB'.format(outbound_date = today, out_time = time, origin = origin, destination = destination)
-r = requests.get(url)
+r = requests.get(f'https://tickets.trc.cymru/api/v1/silverrail/ticketsearch?token=Ir00ktJ11ZwvdSoNX79E&origin={origin}&destination={destination}&outboundDate={today}&outboundTime={time}&timeWindowInbound=departure&timeWindowOutbound=departure&ticketType=single&earlierSearch=false&adult=1&child=0&tfwRestricted=false&channelCode=WEB').json()['legs'][0]['legSolution']
 
 print("Departs from",args.o, "\t", "Arrives At", args.d)
-for x in range(0, 5):
-	# this is a messy way of getting all of the available train times. 
+for x in r:
 	try:
-		departureTime = str(r.json()["legs"][0]["legSolution"][x]["travelSegments"][0]["departureDateTime"])[11:]
-		arrivalTime = str(r.json()["legs"][0]["legSolution"][x]["travelSegments"][0]["arrivalDateTime"])[11:]
+		departureTime = x["travelSegments"][0]["departureDateTime"][11:]
+		arrivalTime = x["travelSegments"][0]["arrivalDateTime"][11:]
 		print(departureTime, "\t"*3, arrivalTime)
 	except IndexError:
 		break
