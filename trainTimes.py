@@ -20,9 +20,6 @@ r = requests.get(f'https://tickets.trc.cymru/api/v1/silverrail/ticketsearch?toke
 
 print("Departs from",args.o, "\t", "Arrives At", args.d)
 for x in r:
-	try:
-		departureTime = x["travelSegments"][0]["departureDateTime"][11:]
-		arrivalTime = x["travelSegments"][0]["arrivalDateTime"][11:]
-		print(departureTime, "\t"*3, arrivalTime)
-	except IndexError:
-		break
+    departureTime = x["travelSegments"][0]["departureDateTime"][11:]
+    arrivalTime = x["travelSegments"][0]["arrivalDateTime"][11:]
+    print(departureTime, "\t"*3, arrivalTime)
