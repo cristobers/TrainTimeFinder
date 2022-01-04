@@ -2,7 +2,7 @@
 import requests, argparse
 from time import gmtime, strftime
 from datetime import date
-from getStationNamesAPI import GetStationNames
+from getStationNamesAPI import getStationNames
 from getTrainTimesAPI import getTrainTimes
 
 parser = argparse.ArgumentParser()
@@ -13,11 +13,11 @@ args = parser.parse_args()
 today = date.today().strftime('%Y-%m-%d')
 time = strftime("%H:%M", gmtime())
 
-origin = GetStationNames(args.o) 
-destination = GetStationNames(args.d) 
+origin = getStationNames(args.o) 
+destination = getStationNames(args.d) 
 trains = getTrainTimes(origin, destination, today, time)
 
-print("Departs from",args.o, "\t", "Arrives At", args.d)
+print("Departs from", args.o, "\t", "Arrives At", args.d)
 for time in trains:
     departureTime = time["travelSegments"][0]["departureDateTime"][11:]
     arrivalTime = time["travelSegments"][0]["arrivalDateTime"][11:]
