@@ -2,7 +2,8 @@
 import requests, argparse
 from time import gmtime, strftime
 from datetime import date
-from getStationNames import GetStationNames
+from getStationNamesAPI import GetStationNames
+from getTrainTimesAPI import getTrainTimes
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-o", "-O", help="origin station")
@@ -14,12 +15,10 @@ time = strftime("%H:%M", gmtime())
 
 origin = GetStationNames(args.o) 
 destination = GetStationNames(args.d) 
-
-# this url will have to be changed if and when TFW change their API.
-r = requests.get(f'https://tickets.trc.cymru/api/v1/silverrail/ticketsearch?token=Ir00ktJ11ZwvdSoNX79E&origin={origin}&destination={destination}&outboundDate={today}&outboundTime={time}&timeWindowInbound=departure&timeWindowOutbound=departure&ticketType=single&earlierSearch=false&adult=1&child=0&tfwRestricted=false&channelCode=WEB').json()['legs'][0]['legSolution']
+trains = getTrainTimes(origin, destination, today, time)
 
 print("Departs from",args.o, "\t", "Arrives At", args.d)
-for x in r:
-    departureTime = x["travelSegments"][0]["departureDateTime"][11:]
-    arrivalTime = x["travelSegments"][0]["arrivalDateTime"][11:]
+for time in trains:
+    departureTime = time["travelSegments"][0]["departureDateTime"][11:]
+    arrivalTime = time["travelSegments"][0]["arrivalDateTime"][11:]
     print(departureTime, "\t"*3, arrivalTime)
