@@ -10,3 +10,7 @@ This is a python script that uses Transport For Wales' API to get the train arri
 
 ## Why did you make this?
 Because I wanted to.
+
+### Note
+KeyError ['legs'] could mean that there's something wrong with TFW's API, or there's no trains running 
+ATM.
