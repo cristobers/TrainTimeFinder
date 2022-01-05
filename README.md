@@ -13,4 +13,4 @@ Because I wanted to.
 
 ### Note
 KeyError ['legs'] could mean that there's something wrong with TFW's API, or there's no trains running 
-ATM.
+right now. If you're seeing this error and it's rather late at night, it's probably time to go to bed.
