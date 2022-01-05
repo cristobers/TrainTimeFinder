@@ -1,5 +1,7 @@
 # Train Time Finder For TFW Services 
 
+![beautiful gif of the script working](train.gif)
+
 ## What is this?
 This is a python script that uses Transport For Wales' API to get the train arrival and departure times.
 

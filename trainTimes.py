@@ -17,8 +17,8 @@ origin = getStationNames(args.o)
 destination = getStationNames(args.d) 
 trains = getTrainTimes(origin, destination, today, time)
 
-print("Departs from", args.o, "\t", "Arrives At", args.d)
+print(args.o, "-->", args.d, "\n")
 for time in trains:
     departureTime = time["travelSegments"][0]["departureDateTime"][11:]
     arrivalTime = time["travelSegments"][0]["arrivalDateTime"][11:]
-    print(departureTime, "\t"*3, arrivalTime)
+    print(departureTime, "\t", arrivalTime)
