@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import requests, argparse
 from time import gmtime, strftime
 from datetime import date
@@ -15,10 +16,9 @@ time = strftime("%H:%M", gmtime())
 
 origin = getStationNames(args.o) 
 destination = getStationNames(args.d) 
-trains = getTrainTimes(origin, destination, today, time)
 
 print(args.o, "-->", args.d, "\n")
-for time in trains:
+for time in getTrainTimes(origin, destination, today, time):
     departureTime = time["travelSegments"][0]["departureDateTime"][11:]
     arrivalTime = time["travelSegments"][0]["arrivalDateTime"][11:]
     print(departureTime, "\t", arrivalTime)
