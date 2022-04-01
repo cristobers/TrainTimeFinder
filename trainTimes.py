@@ -17,9 +17,8 @@ time = strftime("%H:%M", gmtime())
 origin = getStationNames(args.o) 
 destination = getStationNames(args.d) 
 
-
-print(args.o, "-->", args.d, "\n")
+print(args.o, "-->", args.d)
 for time in getTrainTimes(origin, destination, today, time):
-    departureTime = time["departureDateTime"][11:]
-    arrivalTime = time["arrivalDateTime"][11:]
+    departureTime = time["departureDateTime"][11:][:5]
+    arrivalTime = time["arrivalDateTime"][11:][:5]
     print(departureTime, "\t", arrivalTime)
