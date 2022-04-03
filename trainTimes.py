@@ -7,8 +7,8 @@ from getStationNamesAPI import getStationNames
 from getTrainTimesAPI import getTrainTimes
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-o", "-O", help="origin station")
-parser.add_argument("-d", "-D", help="destination station")
+parser.add_argument("-o", "-O", help="Origin Station")
+parser.add_argument("-d", "-D", help="Destination Station")
 args = parser.parse_args()
 
 today = date.today().strftime('%Y-%m-%d')
