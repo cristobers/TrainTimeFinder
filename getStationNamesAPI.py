@@ -6,5 +6,6 @@ def getStationNames(user_input):
         for x in r:
             if x["name"] == user_input:
                 return x["sr_code"]
+#        return [x["sr_code"][0] for x in r if x["name"] == user_input]
     except Exception as e:
         print("An error has occured: ", e)
