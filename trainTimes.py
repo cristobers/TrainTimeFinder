@@ -14,8 +14,8 @@ args = parser.parse_args()
 today = date.today().strftime('%Y-%m-%d')
 time = strftime("%H:%M", gmtime())
 
-origin = getStationNames(args.o) 
-destination = getStationNames(args.d) 
+origin = getStationNames(args.o)[0]
+destination = getStationNames(args.d)[0] 
 
 print(args.o, "-->", args.d)
 for time in getTrainTimes(origin, destination, today, time):
