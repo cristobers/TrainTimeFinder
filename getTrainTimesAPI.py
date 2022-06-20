@@ -1,6 +1,6 @@
 import requests
 
-def getTrainTimes(origin, destination, today, time):
+def getTrainTimes(origin: str, destination: str, today: str, time: str) -> []:
     r = requests.get(f"https://tickets.trc.cymru/api/v1/silverrail/ticketsearch?token=Ir00ktJ11ZwvdSoNX79E&origin={origin}&destination={destination}&outboundDate={today}&outboundTime={time}&timeWindowInbound=departure&timeWindowOutbound=departure&ticketType=single&earlierSearch=false&adult=1&child=0&tfwRestricted=false&channelCode=WEB")
     if r.status_code != 200:
         print("Error with getting the train times. This could be an issue with your internet connection or an issue with the API itself.") 

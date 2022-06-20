@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import requests, argparse
+import argparse
 from time import gmtime, strftime
 from datetime import date
 from getStationNamesAPI import getStationNames
