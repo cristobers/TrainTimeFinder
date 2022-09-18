@@ -12,15 +12,8 @@ parser.add_argument("-t", help="Specific Time, giving times in the past throws a
 parser.add_argument("-date", "-D", help="Specific Date, months are formatted as such: 2022-09-18, months are zero-padded if they're < 10", metavar='\b')
 args = parser.parse_args()
 
-origin = args.o
-destination = args.d
-time = args.t
-day = args.date
-
-if day is None:
-    today = date.today().strftime('%Y-%m-%d')
-else:
-    today = str(day)
+origin, destination, time, day = args.o, args.d, args.t, args.date
+today = [date.today().strftime('%Y-%m-%d') if day is None else str(day)][0]
 
 if time is None:
     time = strftime("%H:%M", gmtime())
