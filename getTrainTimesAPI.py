@@ -1,7 +1,7 @@
 from requests import get, exceptions
 from getStationNamesAPI import getStationNames
 
-def getTrainTimes(origin: str, destination: str, today: str, time: str) -> []:
+def getTrainTimes(origin: str, destination: str, today: str, time: str):
     
     if len(origin) > 5:
         origin = getStationNames(origin) 

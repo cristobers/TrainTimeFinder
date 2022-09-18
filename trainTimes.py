@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
-import argparse
+from argparse import ArgumentParser
 from time import gmtime, strftime
 from datetime import date
-from getStationNamesAPI import getStationNames
 from getTrainTimesAPI import getTrainTimes
 
-parser = argparse.ArgumentParser()
+parser = ArgumentParser()
 parser.add_argument("-o", help="Origin Station", metavar='\b')
 parser.add_argument("-d", help="Destination Station", metavar='\b')
 parser.add_argument("-t", help="Specific Time, giving times in the past throws an error ( no time travelling allowed )", metavar='\b')
