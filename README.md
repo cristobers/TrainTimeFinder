@@ -16,3 +16,7 @@ If you're going to use the date and time arguments, make sure to not set either 
 
 ## Why did you make this?
 Transport For Wales' mobile app takes way too long to load, especially if all I'm doing is checking the time in which one train arrives at the station. This is a lot faster (for me anyways).
+
+## Extra Information
+If your journey includes two or more train changes, I would highly recommend checking the departure times between all of the individual stations. So that in the event that there are rail disruptions,
+the script will tell you.

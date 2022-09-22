@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 from argparse import ArgumentParser
 from time import gmtime, strftime
 from datetime import date
@@ -13,7 +14,11 @@ parser.add_argument("-date", "-D", help="Specific Date, months are formatted as 
 args = parser.parse_args()
 
 origin, destination, time, day = args.o, args.d, args.t, args.date
-today = [date.today().strftime('%Y-%m-%d') if day is None else str(day)][0]
+if args.date < date.today().strftime('%Y-%m-%d'):
+    print("ERROR: You've tried to supply a date that's in the past.")
+    sys.exit()
+else:
+    today = [date.today().strftime('%Y-%m-%d') if day is None else str(day)][0]
 
 if time is None:
     time = strftime("%H:%M", gmtime())
@@ -22,9 +27,16 @@ else:
         time = '0' + str(time)
     else:
         time = str(time)
+printed = False
 
 print(args.o, "-->", args.d)
 for time in getTrainTimes(origin, destination, today, time):
     departureTime = time["departureDateTime"][11:][:5]
     arrivalTime = time["arrivalDateTime"][11:][:5]
+    transportType = time["type"]
+
+    if transportType == "BUS" and printed == False:
+        print("There may be disruptions on your journey, please check the Tansport For Wales app just to make sure. (bus replacements or otherwise)")
+        printed = True
+
     print(departureTime, "\t", arrivalTime)
