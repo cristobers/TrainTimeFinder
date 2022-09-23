@@ -9,12 +9,14 @@ def getTrainTimes(origin: str, destination: str, today: str, time: str):
     if len(destination) > 5:
         destination = getStationNames(destination)
 
-    url = f"""https://tickets.trc.cymru/api/v1/silverrail/ticketsearch?token=Ir00ktJ11ZwvdSoNX79E
+    url = f"""
+    https://tickets.trc.cymru/api/v1/silverrail/ticketsearch?token=Ir00ktJ11ZwvdSoNX79E
     &origin={origin}&destination={destination}
     &outboundDate={today}&outboundTime={time}
     &timeWindowInbound=departure&timeWindowOutbound=departure
     &ticketType=single&earlierSearch=false&adult=1
-    &child=0&tfwRestricted=false&channelCode=WEB"""
+    &child=0&tfwRestricted=false&channelCode=WEB
+    """
     
     try:
         r = get(url)

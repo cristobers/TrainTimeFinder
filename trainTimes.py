@@ -13,9 +13,9 @@ parser.add_argument("-t", help="Specific Time, giving times in the past throws a
 parser.add_argument("-date", "-D", help="Specific Date, months are formatted as such: 2022-09-18, months are zero-padded if they're < 10", metavar='\b')
 args = parser.parse_args()
 
-origin, destination, time, day = args.o, args.d, args.t, args.date
-if args.date < date.today().strftime('%Y-%m-%d'):
-    print("ERROR: You've tried to supply a date that's in the past.")
+origin, destination, time, day, printed = args.o, args.d, args.t, args.date, False
+if day < date.today().strftime('%Y-%m-%d') or day == date.today().strftime('%Y-%m-%d') and time < strftime("%H:%M", gmtime()):
+    print("ERROR: You've tried to supply a date or time that is in the past.")
     sys.exit()
 else:
     today = [date.today().strftime('%Y-%m-%d') if day is None else str(day)][0]
@@ -27,7 +27,6 @@ else:
         time = '0' + str(time)
     else:
         time = str(time)
-printed = False
 
 print(args.o, "-->", args.d)
 for time in getTrainTimes(origin, destination, today, time):
