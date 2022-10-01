@@ -11,10 +11,11 @@ parser.add_argument("-o", help="Origin Station", metavar='\b')
 parser.add_argument("-d", help="Destination Station", metavar='\b')
 parser.add_argument("-t", help="Specific Time, giving times in the past throws an error ( no time travelling allowed )", metavar='\b')
 parser.add_argument("-date", "-D", help="Specific Date, months are formatted as such: 2022-09-18, months are zero-padded if they're < 10", metavar='\b')
-args = parser.parse_args()
 
+args = parser.parse_args()
 origin, destination, time, day, printed = args.o, args.d, args.t, args.date, False
-if day < date.today().strftime('%Y-%m-%d') or day == date.today().strftime('%Y-%m-%d') and time < strftime("%H:%M", gmtime()):
+
+if day is not None and day < date.today().strftime('%Y-%m-%d'):
     print("ERROR: You've tried to supply a date or time that is in the past.")
     sys.exit()
 else:
