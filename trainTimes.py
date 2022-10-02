@@ -2,7 +2,7 @@
 
 import sys
 from argparse import ArgumentParser
-from time import gmtime, strftime
+from time import localtime, strftime
 from datetime import date
 from getTrainTimesAPI import getTrainTimes
 
@@ -22,7 +22,7 @@ else:
     today = [date.today().strftime('%Y-%m-%d') if day is None else str(day)][0]
 
 if time is None:
-    time = strftime("%H:%M", gmtime())
+    time = strftime("%H:%M", localtime())
 else:
     if len(str(time)) == 4 and str(time)[0] != '0':
         time = '0' + str(time)
