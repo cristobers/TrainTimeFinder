@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys
+from sys import exit
 from argparse import ArgumentParser
 from time import localtime, strftime
 from datetime import date
@@ -15,19 +15,17 @@ parser.add_argument("-date", "-D", help="Specific Date, months are formatted as 
 args = parser.parse_args()
 origin, destination, time, day, printed = args.o, args.d, args.t, args.date, False
 
-if day is not None and day < date.today().strftime('%Y-%m-%d'):
+if day != None and day < date.today().strftime('%Y-%m-%d'):
     print("ERROR: You've tried to supply a date or time that is in the past.")
-    sys.exit()
+    exit()
 else:
-    today = [date.today().strftime('%Y-%m-%d') if day is None else str(day)][0]
+    today = ''.join([date.today().strftime('%Y-%m-%d') if day == None else str(day)])
 
-if time is None:
+if time == None:
     time = strftime("%H:%M", localtime())
 else:
-    if len(str(time)) == 4 and str(time)[0] != '0':
-        time = '0' + str(time)
-    else:
-        time = str(time)
+    if len(time) == 4 and time[0] != '0':
+        time = '0' + time
 
 print(args.o, "-->", args.d)
 for time in getTrainTimes(origin, destination, today, time):

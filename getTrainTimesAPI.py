@@ -20,7 +20,7 @@ def getTrainTimes(origin: str, destination: str, today: str, time: str):
     
     try:
         r = get(url)
-        return([t["travelSegments"][0] for t in r.json()["legs"][0]["legSolution"]])
+        return [t["travelSegments"][0] for t in r.json()["legs"][0]["legSolution"]]
     except KeyError as e:
         print(f"An error has occurred to do with: {e}, One of two things may have happened:\n- You may have misspelled one of the stations names\n- You've tried to look at train times in the past (you may have supplied a time in the past and forgotten a date)")        
     except exceptions.RequestException as e:
