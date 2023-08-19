@@ -70,7 +70,7 @@ class Departures:
         elif destination != destination.upper():
             raise NameNotCapitalised("Destination station needs to be capitalised.")
 
-        if len(origin) != 5 or len(destination) != 5:
+        if len(origin) != 5:
             raise NameWrongLength("Origin station needs to be 5 characters long.")
         elif len(destination) != 5:
             raise NameWrongLength("Destination station needs to be 5 characters long.")
