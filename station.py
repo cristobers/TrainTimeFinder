@@ -60,20 +60,14 @@ class Departures:
         """
         Grabs train departure times.
         """
-        if type(origin) != str:
-            raise TypeError("Origin station should be of type str.")
-        elif type(destination) != str:
-            raise TypeError("Destination station should be of type str.")
+        if type(origin) != str or type(destination) != str:
+            raise TypeError("Station names should be of type str.")
 
-        if origin != origin.upper():
-            raise NameNotCapitalised("Origin station needs to be capitalised.")
-        elif destination != destination.upper():
-            raise NameNotCapitalised("Destination station needs to be capitalised.")
+        if len(origin) != 5 or len(destination) != 5:
+            raise NameWrongLength("Station names should be 5 characters long,")
 
-        if len(origin) != 5:
-            raise NameWrongLength("Origin station needs to be 5 characters long.")
-        elif len(destination) != 5:
-            raise NameWrongLength("Destination station needs to be 5 characters long.")
+        if origin != origin.upper() or destination != destination.upper():
+            raise NameNotCapitalised("Station names need to be fully capitalised.")
 
         try:
             resp = requests.get(TicketSearchURL(origin, destination, date, time))
