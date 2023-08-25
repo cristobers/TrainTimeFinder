@@ -37,13 +37,16 @@ def name(stationName: str) -> str:
     try:
         URL = f"{TFW_STATIONS_BASE_API}{TFW_FIND_STATIONS}{stationName}"
         resp = requests.get(URL)
-        return ''.join(
-            [x['sr_code'] for x in resp.json() if x['name'] == stationName])
+        
+        # Returns the API variant of the station name if the API response field ['name']
+        # is equal to the stationName.
+        return ''.join([x['sr_code'] for x in resp.json() if x['name'] == stationName])
     except requests.exceptions.HTTPError as e:
         return str(e)
 
 class Departures:
     def __init__(self, origin: str, destination: str, date: str, time: str):
+        # self.data returns the raw data from the TFW API call, this is used internally.
         self.data = self.departures(origin, destination, date, time)
         self.legs = self.legs()
 
@@ -68,16 +71,8 @@ class Departures:
 
         if origin != origin.upper() or destination != destination.upper():
             raise NameNotCapitalised("Station names need to be fully capitalised.")
-
         try:
             resp = requests.get(TicketSearchURL(origin, destination, date, time))
             return resp.json()
         except requests.exceptions.HTTPError as e:
             print(e)
-    
-    def arrivals(self, origin: str, destination: str, date: str, time: str) -> dict:
-        """
-        Calls `self.departures()` but changes the position of the origin and destination
-        stations.
-        """
-        return self.departures(self, destination, origin, date, time)
