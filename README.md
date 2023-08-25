@@ -6,14 +6,18 @@ departure times.
 
 ## How do I use this?
 `python3 trainTimes.py <origin> <destination> <time> <date>`
+
 `trainTimes.py` also serves as an example as to how the library is used.
 
 | Attribute | Type |
 |-----------| -----|
 | `origin`  | `str`|
 | `destination` | `str` |
-| `time` | `str` NOTE: this MAY change in the future.|
-| `date` | `str` NOTE: this MAY change to `datetime` in the future.|
+| `time` | `str` |
+| `date` | `str` |
+
+NOTE: both `time` and `date` are subject to change in the future, mostly `date`, which 
+is likely to change to `datetime`.
 
 ## Examples 
 
@@ -30,13 +34,12 @@ from `GBCDF` to `GBQQM`.
 >>> station.legs
 [{'sequence': '0', 'travelSegmentID': 'LS_1_0_TS_0', 'type': 'TRAIN', 'originTravelPoint': 
 {'origin': 'GBCDF', 'type': 'STATION'}, 'destinationTravelPoint': 
-{'origin': 'GBQQM', 'type': 'STATION'}, 
-'departureDateTime': '2023-10-10T11:53:00', 
+{'origin': 'GBQQM', 'type': 'STATION'}, 'departureDateTime': '2023-10-10T11:53:00', 
 'arrivalDateTime': '2023-10-10T15:15:00', ...
 >>>
 ```
 
 ## Why did you make this?
-Transport For Wales' mobile app takes way too long to load, especially if all I'm doing 
-is checking the time in which one train arrives at the station. This is a lot faster for 
-me.
+At the time of writing this (almost two years ago) the Transport For Wales app was VERY
+slow, as such, this was a lot for faster if all I was doing was remembering when my 
+train was supposed to depart.
