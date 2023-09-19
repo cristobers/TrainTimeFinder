@@ -41,5 +41,5 @@ from `GBCDF` to `GBQQM`.
 
 ## Why did you make this?
 At the time of writing this (almost two years ago) the Transport For Wales app was VERY
-slow, as such, this was a lot for faster if all I was doing was remembering when my 
+slow, as such, this was a lot faster if all I was doing was remembering when my 
 train was supposed to depart.
