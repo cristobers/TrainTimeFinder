@@ -39,6 +39,24 @@ from `GBCDF` to `GBQQM`.
 >>>
 ```
 
+
+Additional arguments can also be supplied for more search terms
+
+| Attribute | Type |
+|-----------| -----|
+| `child`  | `int`|
+| `adult` | `int` |
+| `earlierSearch` | `bool` |
+| `ticketType` | `str` = "single" OR "return" |
+
+```py
+>>> import station
+>>> args = {"child": 1, "adult": 2, "earlierSearch": False, "ticketType": "single"}
+>>> station = station.Departures("GBCDF", "GBQQM", "2024-02-01", "10:00", args)
+>>> station.legs
+[{'sequence': '0', 'travelSegmentID': 'LS_1_0_TS_0', 'type': 'TRAIN', 'originTravelPoint': {'origin': 'GBCDF', 'type': 'STATION'}, ...
+```
+
 ## Why did you make this?
 At the time of writing this (almost two years ago) the Transport For Wales app was VERY
 slow, as such, this was a lot faster if all I was doing was remembering when my 

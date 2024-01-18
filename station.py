@@ -45,9 +45,9 @@ def name(stationName: str) -> str:
         return str(e)
 
 class Departures:
-    def __init__(self, origin: str, destination: str, date: str, time: str):
+    def __init__(self, origin: str, destination: str, date: str, time: str, optional_args: dict = None):
         # self.data returns the raw data from the TFW API call, this is used internally.
-        self.data = self.departures(origin, destination, date, time)
+        self.data = self.departures(origin, destination, date, time, optional_args)
         self.legs = self.legs()
 
     def legs(self):
@@ -59,7 +59,7 @@ class Departures:
             temp.append(elem["travelSegments"][0])
         return temp
 
-    def departures(self, origin, destination, date, time) -> dict:
+    def departures(self, origin: str, destination: str, date: str, time: str, optional_args: dict) -> dict:
         """
         Grabs train departure times.
         """
@@ -72,7 +72,15 @@ class Departures:
         if origin != origin.upper() or destination != destination.upper():
             raise NameNotCapitalised("Station names need to be fully capitalised.")
         try:
-            resp = requests.get(TicketSearchURL(origin, destination, date, time))
+            if optional_args == None or len(optional_args) <= 0:
+                resp = requests.get(TicketSearchURL(origin, destination, date, time))
+            else:
+                child, adult, earlier_search, ticket_type = optional_args.values()
+                resp = requests.get(TicketSearchURL(origin, destination, date, time, 
+                                                    ticket_type,
+                                                    earlier_search,
+                                                    child, 
+                                                    adult))
             return resp.json()
         except requests.exceptions.HTTPError as e:
             print(e)
